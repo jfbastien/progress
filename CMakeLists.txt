@@ -13,4 +13,6 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND
   add_compile_flag("-fcolor-diagnostics")
 endif()
 
-add_compile_flag("-std=c++14")
+add_compile_flag("-std=c++11")
+
+add_executable(mandelbrot mandelbrot.cc)
