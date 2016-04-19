@@ -2,6 +2,7 @@
 
 #include "mandelbrot.h"
 #include "support.h"
+#include "print.h"
 #include <iostream>
 
 int main() {
