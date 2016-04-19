@@ -32,4 +32,8 @@ else()
 endif()
 add_compile_flag("-g3")
 
+ADD_LIBRARY(support STATIC support.cc)
+
+
 add_executable(mandelbrot mandelbrot.cc)
+TARGET_LINK_LIBRARIES(mandelbrot support)
