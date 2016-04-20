@@ -12,7 +12,7 @@ if(CMAKE_BUILD_TYPE AND
 endif()
 
 function(add_compile_flag value)
-  message(status "Building with ${value}")
+  message(status " Building with ${value}")
   foreach(variable CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
     set(${variable} "${${variable}} ${value}" PARENT_SCOPE)
   endforeach(variable)
@@ -31,6 +31,8 @@ else()
   add_compile_flag("-O2")
 endif()
 add_compile_flag("-g3")
+add_compile_flag("-fno-exceptions")
+add_compile_flag("-pthread")
 
 ADD_LIBRARY(support STATIC support.cc)
 
