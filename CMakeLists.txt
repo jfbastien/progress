@@ -33,6 +33,8 @@ endif()
 add_compile_flag("-g3")
 add_compile_flag("-fno-exceptions")
 add_compile_flag("-pthread")
+add_compile_flag("-Wall")
+add_compile_flag("-Wextra")
 
 ADD_LIBRARY(support STATIC support.cc)
 
