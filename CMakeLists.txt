@@ -39,3 +39,6 @@ ADD_LIBRARY(support STATIC support.cc)
 
 add_executable(synchronous synchronous.cc)
 TARGET_LINK_LIBRARIES(synchronous support)
+
+add_executable(volatile_progress volatile_progress.cc)
+TARGET_LINK_LIBRARIES(volatile_progress support)
