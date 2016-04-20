@@ -3,11 +3,13 @@
 #ifndef mandelbrot_h
 #define mandelbrot_h
 
+#include "compiler.h"
 #include <complex>
 #include <limits>
 
 template <typename FP, typename S, size_t X, size_t Y>
-void mandelbrot(FP x, FP y, FP w, FP h, S (&scene)[X][Y], unsigned iterations) {
+ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, S (&scene)[X][Y],
+                              unsigned iterations) {
   typedef std::complex<FP> C;
 
   for (size_t i = X; i; --i)
