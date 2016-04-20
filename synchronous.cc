@@ -3,7 +3,6 @@
 #include "mandelbrot.h"
 #include "support.h"
 #include "print.h"
-#include <iostream>
 
 int main() {
   setup();
@@ -13,7 +12,6 @@ int main() {
     mandelbrot(0.3, -0.2, 0.2, 0.2, scene, i);
     clear_screen();
     print(scene);
-    std::wcout << std::endl;
   }
 
   return 0;

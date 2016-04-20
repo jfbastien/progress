@@ -1,6 +1,6 @@
 // Licensed under the Apache License, Version 2.0.
 
-#include <iostream>
+#include <cwchar>
 #include <string>
 #include <thread>
 #include "compiler.h"
@@ -11,7 +11,7 @@
 constexpr size_t total_iterations = 1000;
 
 NO_INLINE void wait(volatile size_t *iterations) {
-  std::wcout << L"Computing [";
+  fputws(L"Computing [", stdout);
   size_t last_seen_iteration = 0;
   size_t last_printed_percent = 0;
   do {
@@ -21,13 +21,14 @@ NO_INLINE void wait(volatile size_t *iterations) {
       size_t percent_done = last_seen_iteration * 100 / total_iterations;
       if (percent_done != last_printed_percent) {
         std::wstring bars(percent_done - last_printed_percent, L'█');
-        std::wcout << bars;
-        std::flush(std::wcout);
+        fputws(bars.c_str(), stdout);
+        fflush(stdout);
         last_printed_percent = percent_done;
       }
     }
   } while (last_seen_iteration != total_iterations - 1);
-  std::wcout << L"]\n" << std::endl;
+  fputws(L"]\n", stdout);
+  fflush(stdout);
 }
 
 int main() {
@@ -48,7 +49,6 @@ int main() {
   t.join();
 
   print(scene);
-  std::wcout << std::endl;
 
   return 0;
 }

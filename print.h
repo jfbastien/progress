@@ -5,7 +5,8 @@
 
 #include "compiler.h"
 #include <cstdint>
-#include <iostream>
+#include <cstdio>
+#include <cwchar>
 #include <limits>
 
 template <typename S, size_t X, size_t Y>
@@ -15,10 +16,11 @@ NO_INLINE void print(S (&scene)[X][Y]) {
   constexpr size_t sections = std::numeric_limits<S>::max() / shades;
   for (size_t i = 0; i < X; ++i) {
     for (size_t j = 0; j < Y; ++j) {
-      std::wcout << t[scene[i][j] / sections];
+      putwchar(t[scene[i][j] / sections]);
     }
-    std::wcout << L'\n';
+    putwchar(L'\n');
   }
+  fflush(stdout);
 }
 
 #endif
