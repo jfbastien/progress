@@ -8,6 +8,7 @@
 #include <complex>
 #include <limits>
 
+namespace {
 template <typename FP, typename S>
 ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, S *scene_i, S *scene_z,
                               size_t X, size_t Y, size_t iterations) {
@@ -27,6 +28,7 @@ ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, S *scene_i, S *scene_z,
       scene_i[idx] = max_s * it / float(iterations);
       scene_z[idx] = max_s * (std::min(max_z, std::abs(z)) - max_z) / max_z;
     }
+}
 }
 
 #endif

@@ -10,6 +10,7 @@
 #include <cwchar>
 #include <limits>
 
+namespace {
 template <typename S>
 NO_INLINE void print(S *scene_i, S *scene_z, size_t X, size_t Y) {
   constexpr auto max_s = std::numeric_limits<S>::max();
@@ -33,6 +34,7 @@ NO_INLINE void print(S *scene_i, S *scene_z, size_t X, size_t Y) {
     putwchar(L'\n');
   }
   fflush(stdout);
+}
 }
 
 #endif
