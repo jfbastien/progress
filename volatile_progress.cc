@@ -1,12 +1,13 @@
 // Licensed under the Apache License, Version 2.0.
 
-#include <cwchar>
-#include <string>
-#include <thread>
 #include "compiler.h"
 #include "mandelbrot.h"
 #include "print.h"
 #include "support.h"
+
+#include <cwchar>
+#include <string>
+#include <thread>
 
 constexpr size_t total_iterations = 1000;
 
@@ -35,12 +36,13 @@ int main() {
   setup();
 
   volatile size_t iterations = 0;
-  uint8_t scene[45][130] = {0};
+  uint8_t scene_i[45][130];
+  uint8_t scene_z[45][130];
 
-  std::thread t([&scene, &iterations]() {
+  std::thread t([&scene_i, &scene_z, &iterations]() {
     for (size_t i = 1; i != total_iterations; ++i) {
       ++iterations;
-      mandelbrot(0.3, -0.2, 0.2, 0.2, scene, i);
+      mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, i);
     }
   });
 
@@ -48,7 +50,7 @@ int main() {
 
   t.join();
 
-  print(scene);
+  print(scene_i, scene_z);
 
   return 0;
 }
