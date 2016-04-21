@@ -11,12 +11,12 @@
 #include <limits>
 
 namespace {
-template <typename S>
-NO_INLINE void print(S *scene_i, S *scene_z, size_t X, size_t Y) {
+NO_INLINE void print(uint8_t *scene_i, uint8_t *scene_z, size_t X, size_t Y) {
+  typedef uint8_t S;
   constexpr auto max_s = std::numeric_limits<S>::max();
   constexpr wchar_t shades[] = {L'#', L'X', L'*', L'+', L'-', L'.', L' ', L' '};
   constexpr size_t num_shades = sizeof(shades) / sizeof(shades[0]) - 1;
-  constexpr size_t shade_sections = std::numeric_limits<S>::max() / num_shades;
+  constexpr size_t shade_sections = max_s / num_shades;
   constexpr const wchar_t *colors[] = {L"\033[40m", L"\033[41m", L"\033[42m",
                                        L"\033[43m", L"\033[44m", L"\033[45m",
                                        L"\033[46m", L"\033[47m", L"\033[47m"};

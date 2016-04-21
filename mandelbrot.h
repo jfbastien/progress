@@ -9,10 +9,12 @@
 #include <limits>
 
 namespace {
-template <typename FP, typename S>
-ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, S *scene_i, S *scene_z,
-                              size_t X, size_t Y, size_t iterations) {
+template <typename FP>
+ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, uint8_t *scene_i,
+                              uint8_t *scene_z, size_t X, size_t Y,
+                              size_t iterations) {
   typedef std::complex<FP> C;
+  typedef uint8_t S;
   constexpr FP max_z = 2.0;
   constexpr auto max_s = std::numeric_limits<S>::max();
 
