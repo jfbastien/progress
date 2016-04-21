@@ -10,8 +10,8 @@
 #include <cwchar>
 #include <limits>
 
-template <typename S, size_t X, size_t Y>
-NO_INLINE void print(S (&scene_i)[X][Y], S (&scene_z)[X][Y]) {
+template <typename S>
+NO_INLINE void print(S *scene_i, S *scene_z, size_t X, size_t Y) {
   constexpr auto max_s = std::numeric_limits<S>::max();
   constexpr wchar_t shades[] = {L'#', L'X', L'*', L'+', L'-', L'.', L' ', L' '};
   constexpr size_t num_shades = sizeof(shades) / sizeof(shades[0]) - 1;
@@ -24,8 +24,9 @@ NO_INLINE void print(S (&scene_i)[X][Y], S (&scene_z)[X][Y]) {
   constexpr size_t color_sections = max_s / num_colors;
   for (size_t i = 0; i < X; ++i) {
     for (size_t j = 0; j < Y; ++j) {
-      auto shade = shades[scene_i[i][j] / shade_sections];
-      if (shade != L' ') fputws(colors[scene_z[i][j] / color_sections], stdout);
+      size_t idx = j * X + i;
+      auto shade = shades[scene_i[idx] / shade_sections];
+      if (shade != L' ') fputws(colors[scene_z[idx] / color_sections], stdout);
       putwchar(shade);
       if (shade != L' ') fputws(reset, stdout);
     }

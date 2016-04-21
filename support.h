@@ -3,7 +3,11 @@
 #ifndef setup_h
 #define setup_h
 
+#include <cstddef>
+#include <utility>
+
 void setup();
 void clear_screen();
+std::pair<size_t, size_t> screen_size();
 
 #endif

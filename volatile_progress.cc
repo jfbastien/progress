@@ -35,22 +35,26 @@ NO_INLINE void wait(volatile size_t *iterations) {
 int main() {
   setup();
 
-  volatile size_t iterations = 0;
-  uint8_t scene_i[45][130];
-  uint8_t scene_z[45][130];
+  size_t width, height;
+  std::tie(width, height) = screen_size();
+  auto scene_i = new uint8_t[width * height];
+  auto scene_z = new uint8_t[width * height];
 
-  std::thread t([&scene_i, &scene_z, &iterations]() {
+  volatile size_t iterations = 0;
+
+  std::thread t([&scene_i, &scene_z, &iterations, width, height]() {
     for (size_t i = 1; i != total_iterations; ++i) {
       ++iterations;
-      mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, i);
+      mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, width, height, i);
     }
   });
-
   wait(&iterations);
-
   t.join();
 
-  print(scene_i, scene_z);
+  print(scene_i, scene_z, width, height);
+
+  delete[] scene_z;
+  delete[] scene_i;
 
   return 0;
 }

@@ -7,14 +7,19 @@
 int main() {
   setup();
 
-  uint8_t scene_i[45][130];
-  uint8_t scene_z[45][130];
+  size_t width, height;
+  std::tie(width, height) = screen_size();
+  auto scene_i = new uint8_t[width * height];
+  auto scene_z = new uint8_t[width * height];
 
   for (size_t i = 1; i != 100; ++i) {
-    mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, i);
+    mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, width, height, i);
     clear_screen();
-    print(scene_i, scene_z);
+    print(scene_i, scene_z, width, height);
   }
+
+  delete[] scene_z;
+  delete[] scene_i;
 
   return 0;
 }
