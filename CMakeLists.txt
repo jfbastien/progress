@@ -7,7 +7,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 string(TOUPPER "${CMAKE_BUILD_TYPE}" uppercase_CMAKE_BUILD_TYPE)
 if(CMAKE_BUILD_TYPE AND
-    NOT uppercase_CMAKE_BUILD_TYPE MATCHES "^(DEBUG|RELEASE)$")
+    NOT uppercase_CMAKE_BUILD_TYPE MATCHES "^(DEBUG|RELEASE|OHMY)$")
   message(FATAL_ERROR "Invalid value for CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 endif()
 
@@ -28,6 +28,8 @@ add_compile_flag("-stdlib=libc++")
 
 if(uppercase_CMAKE_BUILD_TYPE STREQUAL "DEBUG")
   add_compile_flag("-O0")
+elseif(uppercase_CMAKE_BUILD_TYPE STREQUAL "OHMY")
+  add_compile_flag("-OhMy")
 else()
   add_compile_flag("-O2")
 endif()
