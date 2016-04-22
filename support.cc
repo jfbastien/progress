@@ -9,7 +9,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-void setup() { setlocale(LC_ALL, "en_US.UTF-8"); }
+void setup() { setlocale(LC_ALL, "C.UTF-8"); }
 
 void clear_screen() { fputws(L"\033[2J\033[1;1H", stdout); }
 
