@@ -6,6 +6,7 @@
 #include <cwchar>
 #include <limits>
 
+namespace {
 typedef uint8_t S;
 constexpr auto max_s = std::numeric_limits<S>::max();
 constexpr wchar_t shades[] = {L'#', L'X', L'*', L'+', L'-', L'.', L' ', L' '};
@@ -19,7 +20,7 @@ constexpr size_t num_colors = sizeof(colors) / sizeof(colors[0]) - 1;
 constexpr size_t color_sections = max_s / num_colors;
 constexpr size_t max_chars = 11;
 
-static const wchar_t *lookup(wchar_t *buf, S i, S z) {
+const wchar_t *lookup(wchar_t *buf, S i, S z) {
   wchar_t shade = shades[i / shade_sections];
   const wchar_t *color = colors[z / color_sections];
   wchar_t *pos = buf;
@@ -28,6 +29,7 @@ static const wchar_t *lookup(wchar_t *buf, S i, S z) {
   if (shade != L' ') pos = wcscpy(pos, reset) + wcslen(reset);
   *pos++ = L'\0';
   return buf;
+}
 }
 
 void print(S *scene_i, S *scene_z, size_t X, size_t Y) {
