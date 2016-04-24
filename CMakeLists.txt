@@ -39,7 +39,7 @@ add_compile_flag("-pthread")
 add_compile_flag("-Wall")
 add_compile_flag("-Wextra")
 
-ADD_LIBRARY(support STATIC support.cc)
+ADD_LIBRARY(support STATIC print.cc support.cc)
 
 
 add_executable(synchronous synchronous.cc)
