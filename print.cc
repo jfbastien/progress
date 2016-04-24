@@ -6,16 +6,18 @@
 #include <cwchar>
 #include <limits>
 
+#define ESC L"\033"
+
 namespace {
 typedef uint8_t S;
 constexpr auto max_s = std::numeric_limits<S>::max();
 constexpr wchar_t shades[] = {L'#', L'X', L'*', L'+', L'-', L'.', L' ', L' '};
 constexpr size_t num_shades = sizeof(shades) / sizeof(shades[0]) - 1;
 constexpr size_t shade_sections = max_s / num_shades;
-constexpr const wchar_t *colors[] = {L"\033[40m", L"\033[41m", L"\033[42m",
-                                     L"\033[43m", L"\033[44m", L"\033[45m",
-                                     L"\033[46m", L"\033[47m", L"\033[47m"};
-constexpr const wchar_t *reset = L"\033[0m";
+constexpr const wchar_t *colors[] = {ESC L"[40m", ESC L"[41m", ESC L"[42m",
+                                     ESC L"[43m", ESC L"[44m", ESC L"[45m",
+                                     ESC L"[46m", ESC L"[47m", ESC L"[47m"};
+constexpr const wchar_t *reset = ESC L"[0m";
 constexpr size_t num_colors = sizeof(colors) / sizeof(colors[0]) - 1;
 constexpr size_t color_sections = max_s / num_colors;
 constexpr size_t max_chars = 11;
