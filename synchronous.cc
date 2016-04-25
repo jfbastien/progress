@@ -6,6 +6,7 @@
 
 int main() {
   setup();
+  clear_screen();
 
   size_t width, height;
   std::tie(width, height) = screen_size();
@@ -14,8 +15,7 @@ int main() {
 
   for (size_t i = 1; i != 100; ++i) {
     mandelbrot(0.3f, -0.2f, 0.2f, 0.2f, scene_i, scene_z, width, height, i);
-    clear_screen();
-    print(scene_i, scene_z, width, height);
+    print(PrintOption::Color, scene_i, scene_z, width, height);
   }
 
   delete[] scene_z;

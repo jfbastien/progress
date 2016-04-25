@@ -34,6 +34,7 @@ NO_INLINE void wait(volatile size_t *iterations) {
 
 int main() {
   setup();
+  clear_screen();
 
   size_t width, height;
   std::tie(width, height) = screen_size();
@@ -51,7 +52,7 @@ int main() {
   wait(&iterations);
   t.join();
 
-  print(scene_i, scene_z, width, height);
+  print(PrintOption::Color, scene_i, scene_z, width, height);
 
   delete[] scene_z;
   delete[] scene_i;
