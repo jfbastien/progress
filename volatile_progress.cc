@@ -11,6 +11,12 @@
 
 constexpr size_t total_iterations = 1000;
 
+struct S {
+  uint8_t v;
+  uint8_t load() const { return v; }
+  void store(uint8_t s) { v = s; }
+};
+
 NO_INLINE void wait(volatile size_t *iterations) {
   fputws(L"Computing [", stdout);
   size_t last_seen_iteration = 0;
@@ -38,8 +44,8 @@ int main() {
 
   size_t width, height;
   std::tie(width, height) = screen_size();
-  auto scene_i = new uint8_t[width * height];
-  auto scene_z = new uint8_t[width * height];
+  auto scene_i = new S[width * height];
+  auto scene_z = new S[width * height];
 
   volatile size_t iterations = 0;
 

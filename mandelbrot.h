@@ -9,9 +9,9 @@
 #include <limits>
 
 namespace {
-template <typename FP>
-ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, uint8_t *scene_i,
-                              uint8_t *scene_z, size_t X, size_t Y,
+template <typename Scene, typename FP>
+ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, Scene *scene_i,
+                              Scene *scene_z, size_t X, size_t Y,
                               size_t iterations) {
   typedef std::complex<FP> C;
   typedef uint8_t S;
@@ -27,8 +27,9 @@ ALWAYS_INLINE void mandelbrot(FP x, FP y, FP w, FP h, uint8_t *scene_i,
       while (--it && std::abs(z) < max_z) z = z * z + c;
 
       size_t idx = (j - 1) * X + (i - 1);
-      scene_i[idx] = max_s * it / float(iterations);
-      scene_z[idx] = max_s * (std::min(max_z, std::abs(z)) - max_z) / max_z;
+      scene_i[idx].store(max_s * it / float(iterations));
+      scene_z[idx].store(max_s * (std::min(max_z, std::abs(z)) - max_z) /
+                         max_z);
     }
 }
 }
